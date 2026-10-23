@@ -15,6 +15,9 @@ package id.ac.polinema.uts.rental;
  *   private int rentalCount;   // nilai awal 0
  */
 public class Customer {
+    private String customerId;
+    private String name;
+    private int rentalCount;
 
     /**
      * Membuat pelanggan yang belum punya sewa aktif.
@@ -22,6 +25,10 @@ public class Customer {
      * IllegalArgumentException jika tidak valid.
      */
     public Customer(String customerId, String name) {
+        if (customerId == null || customerId.isBlank()) {
+            throw new IllegalArgumentException("Customer ID cannot be empty");
+        }
+        
         // TODO Bantuan: validasi dulu sebelum mengisi field. Aturan nama sama dengan setName.
         // Bagian 4: kartu rental juga dibuat di sini (lihat diagram Bagian 4).
         //
@@ -31,17 +38,18 @@ public class Customer {
         //   }
         //   this.customerId = customerId;
         //   setName(____);
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.customerId = customerId;
+        setName(name);
     }
 
     public String getCustomerId() {
         // TODO Bantuan: kembalikan data yang disimpan constructor.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.customerId;
     }
 
     public String getName() {
         // TODO Bantuan: sama seperti getCustomerId.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.name;
     }
 
     /** Nama tidak boleh null atau kosong: lempar IllegalArgumentException dan biarkan nama lama. */
@@ -53,12 +61,15 @@ public class Customer {
         //       throw new IllegalArgumentException("____");
         //   }
         //   this.name = name;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+        this.name = name;
     }
 
     public int getRentalCount() {
         // TODO Bantuan: kembalikan jumlah sewa aktif saat ini.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.rentalCount;
     }
 
     /** True jika pelanggan masih boleh menyewa (batasnya 2 sewa aktif). */
@@ -66,8 +77,8 @@ public class Customer {
         // TODO Bantuan: apakah perlu field baru, atau cukup dihitung dari data yang sudah ada?
         //
         // Kerangka:
-        //   return rentalCount ____ 2;
-        throw new UnsupportedOperationException("Not implemented yet");
+        //   return rentalCount < 2;
+        return this.rentalCount < 2;
     }
 
     /** Menambah jumlah sewa. Jika sudah di batas, tidak berubah dan hasilnya false. */
@@ -81,7 +92,11 @@ public class Customer {
         //   }
         //   rentalCount++;
         //   return true;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!canRent()) {
+            return false;
+        }
+        this.rentalCount++;
+        return true;
     }
 
     /** Mengurangi jumlah sewa. Jika sudah tidak ada sewa, tidak berubah dan hasilnya false. */
@@ -94,6 +109,10 @@ public class Customer {
         //   }
         //   rentalCount--;
         //   return true;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (this.rentalCount == 0) {
+            return false;
+        }
+        this.rentalCount--;
+        return true;
     }
 }
