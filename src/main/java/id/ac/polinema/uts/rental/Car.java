@@ -18,16 +18,27 @@ package id.ac.polinema.uts.rental;
  */
 public class Car {
 
+    private String plate;
+    private String model;      
+    private int year;
+    private boolean available;
+
     /**
      * Membuat mobil baru yang masih tersedia (belum disewa).
      * Bagian 3: plate tidak boleh kosong; model dan year divalidasi seperti setter-nya
      * (tahun minimal 1990).
      */
     public Car(String plate, String model, int year) {
+        if (plate == null || plate.isBlank()) {
+            throw new IllegalArgumentException("Plate cannot be empty");
+        }
+        this.plate = plate;
         // TODO Bantuan: isi semua field. Mobil baru: apakah sedang disewa atau tidak?
         // Bagian 3: aturan validasi model dan tahun sama dengan setter. Bisakah constructor
         // memakai setter-nya?
-        //
+        setModel(model);
+        setYear(year);
+        this.available = true;
         // Kerangka (Bagian 2):
         //   this.plate = plate;
         //   this.model = ____;
@@ -37,26 +48,27 @@ public class Car {
         // Kerangka (Bagian 3): ganti dua baris model dan year dengan pemanggilan setter.
         //   setModel(____);
         //   setYear(____);
-        throw new UnsupportedOperationException("Not implemented yet");
+       
     }
 
     public String getPlate() {
         // TODO Bantuan: kembalikan data yang disimpan constructor.
-        //
+        return this.plate;
         // Kerangka:
         //   return ____;
-        throw new UnsupportedOperationException("Not implemented yet");
+        
     }
 
     public String getModel() {
         // TODO Bantuan: sama seperti getPlate.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.model;
     }
 
     public int getYear() {
         // TODO Bantuan: sama seperti getPlate.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.year;
     }
+    
 
     /** True jika mobil ada di garasi (tidak sedang disewa). */
     public boolean isAvailable() {
@@ -64,7 +76,7 @@ public class Car {
         //
         // Kerangka:
         //   return ____;
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.available;
     }
 
     /**
@@ -81,7 +93,11 @@ public class Car {
         //   }
         //   ____ = false;
         //   return true;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (!this.available) {
+            return false;
+        }
+        this.available = false;
+        return true;
     }
 
     /** Mobil dikembalikan: mobil bisa disewa lagi. */
@@ -90,7 +106,7 @@ public class Car {
         //
         // Kerangka:
         //   ____ = true;
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.available = true;
     }
 
     /**
@@ -106,7 +122,10 @@ public class Car {
         //       throw new IllegalArgumentException("____");
         //   }
         //   this.model = model;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (model == null || model.isBlank()) {
+            throw new IllegalArgumentException("Model cannot be empty");
+        }
+        this.model = model;
     }
 
     /**
@@ -121,6 +140,9 @@ public class Car {
         //       throw new IllegalArgumentException("____");
         //   }
         //   this.year = year;
-        throw new UnsupportedOperationException("Not implemented yet");
+        if (year < 1990) {
+            throw new IllegalArgumentException("Year must be 1990 or later");
+        }
+        this.year = year;
     }
 }
