@@ -15,15 +15,19 @@ package id.ac.polinema.uts.rental;
  */
 public class Brand {
 
+    private String name;
+    private String country;
+
     /** Membuat merek dengan nama dan negara asal. */
     public Brand(String name, String country) {
         // TODO Bantuan: nama parameter sama dengan nama field. Kata kunci apa yang
         // menunjuk ke objek yang sedang dibuat?
         //
         // Kerangka:
-        //   this.name = ____;
-        //   this.country = ____;
-        throw new UnsupportedOperationException("Not implemented yet");
+        //   this.name = name;
+        //   this.country = country;
+        this.name = name;
+        this.country = country;
     }
 
     public String getName() {
@@ -31,12 +35,12 @@ public class Brand {
         //
         // Kerangka:
         //   return ____;
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.name;
     }
 
     public String getCountry() {
         // TODO Bantuan: sama seperti getName.
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.country;
     }
 
     /** Teks berbentuk "nama (negara)". Contoh: Wuling (China). */
@@ -45,6 +49,8 @@ public class Brand {
         //
         // Kerangka:
         //   return name + " (" + ____ + ")";
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.name + " (" + this.country + ")";
     }
+
 }
+//cek rgsg
