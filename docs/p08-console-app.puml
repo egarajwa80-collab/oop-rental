@@ -1,0 +1,57 @@
+@startuml
+!include skin.iuml
+title Bagian 7: Aplikasi Konsol
+
+class Main {
+  {static} +main(args : String[]) : void
+}
+
+class RentalApp <<buat kelas ini>> {
+  -shop : RentalShop
+  -in : Scanner
+  -out : PrintStream
+  --
+  +RentalApp(shop : RentalShop, in : Scanner, out : PrintStream)
+  +run() : void
+}
+
+class RentalShop <<buat kelas ini>> {
+  -name : String
+  -vehicles : Vehicle[20]
+  -vehicleCount : int
+  -customers : Customer[10]
+  -customerCount : int
+  --
+  +RentalShop(name : String)
+  +getName() : String
+  +addVehicle(vehicle : Vehicle) : boolean
+  +addCustomer(customer : Customer) : boolean
+  +getVehicles() : Vehicle[]
+  +getCustomers() : Customer[]
+  +findVehicleByModel(model : String) : Vehicle
+  +findCustomer(customerId : String) : Customer
+  +searchByKeyword(keyword : String) : Vehicle[]
+  +rent(customerId : String, model : String) : boolean
+  +giveBack(customerId : String, model : String) : boolean
+}
+
+class Vehicle
+class Customer
+class Car
+class Motorcycle
+class Truck
+note bottom of Vehicle : Isi lengkap: lihat diagram Bagian 6
+
+Main ..> RentalShop : dependensi
+Main ..> RentalApp : dependensi
+RentalApp "1" --> "1" RentalShop : asosiasi
+RentalApp ..> Car : dependensi
+RentalApp ..> Motorcycle : dependensi
+RentalApp ..> Truck : dependensi
+RentalApp ..> Customer : dependensi
+RentalShop o-- "0..20" Vehicle : agregasi
+RentalShop o-- "0..10" Customer : agregasi
+Vehicle <|-- Car
+Vehicle <|-- Motorcycle
+Vehicle <|-- Truck
+@enduml

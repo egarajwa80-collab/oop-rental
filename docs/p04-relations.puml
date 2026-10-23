@@ -1,0 +1,83 @@
+@startuml
+!include skin.iuml
+title Bagian 4: Relasi Class
+
+class Garage <<buat kelas ini>> {
+  -code : String
+  -cars : Car[5]
+  -count : int
+  --
+  +Garage(code : String)
+  +getCode() : String
+  +getCarCount() : int
+  +addCar(car : Car) : boolean
+  +findByPlate(plate : String) : Car
+  +countAvailable() : int
+}
+
+class RentalAgent <<buat kelas ini>> {
+  --
+  +rent(customer : Customer, car : Car) : boolean
+  +giveBack(customer : Customer, car : Car) : boolean
+}
+
+class Car {
+  -plate : String
+  -model : String
+  -year : int
+  -available : boolean
+  -brand : Brand
+  --
+  +Car(plate : String, model : String, year : int)
+  +getPlate() : String
+  +getModel() : String
+  +setModel(model : String) : void
+  +getYear() : int
+  +setYear(year : int) : void
+  +isAvailable() : boolean
+  +rentOut() : boolean
+  +returnVehicle() : void
+  +getBrand() : Brand
+  +setBrand(brand : Brand) : void
+}
+
+class Customer {
+  -customerId : String
+  -name : String
+  -rentalCount : int
+  -card : RentalCard
+  --
+  +Customer(customerId : String, name : String)
+  +getCustomerId() : String
+  +getName() : String
+  +setName(name : String) : void
+  +getRentalCount() : int
+  +getCard() : RentalCard
+  +canRent() : boolean
+  +addRental() : boolean
+  +returnRental() : boolean
+}
+
+class Brand {
+  -name : String
+  -country : String
+  --
+  +Brand(name : String, country : String)
+  +getName() : String
+  +getCountry() : String
+  +getInfo() : String
+}
+
+class RentalCard <<buat kelas ini>> {
+  -number : String
+  --
+  +RentalCard(number : String)
+  +getNumber() : String
+}
+
+Garage o-- "0..5" Car : agregasi
+RentalAgent ..> Car : dependensi
+RentalAgent ..> Customer : dependensi
+Car "*" --> "0..1" Brand : asosiasi
+Customer "1" *-- "1" RentalCard : komposisi\n(dibuat di constructor)
+@enduml

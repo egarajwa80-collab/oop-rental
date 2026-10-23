@@ -1,0 +1,58 @@
+@startuml
+!include skin.iuml
+title Bagian 3: Enkapsulasi
+
+class Brand {
+  -name : String
+  -country : String
+  --
+  +Brand(name : String, country : String)
+  +getName() : String
+  +getCountry() : String
+  +getInfo() : String
+}
+
+class Car {
+  -plate : String
+  -model : String
+  -year : int
+  -available : boolean
+  --
+  +Car(plate : String, model : String, year : int)
+  +getPlate() : String
+  +getModel() : String
+  +setModel(model : String) : void
+  +getYear() : int
+  +setYear(year : int) : void
+  +isAvailable() : boolean
+  +rentOut() : boolean
+  +returnVehicle() : void
+}
+note right of Car
+  Tanpa setPlate dan setAvailable.
+  setModel: tolak null/kosong/spasi.
+  setYear: tolak tahun di bawah 1990.
+  IllegalArgumentException, nilai lama tetap.
+end note
+
+class Customer {
+  -customerId : String
+  -name : String
+  -rentalCount : int
+  --
+  +Customer(customerId : String, name : String)
+  +getCustomerId() : String
+  +getName() : String
+  +setName(name : String) : void
+  +getRentalCount() : int
+  +canRent() : boolean
+  +addRental() : boolean
+  +returnRental() : boolean
+}
+note right of Customer
+  Batas 2 sewa aktif.
+  Tanpa setCustomerId dan setRentalCount.
+end note
+Brand -[hidden]down-> Car
+Car -[hidden]down-> Customer
+@enduml

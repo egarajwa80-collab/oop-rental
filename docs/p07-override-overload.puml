@@ -1,0 +1,61 @@
+@startuml
+!include skin.iuml
+title Bagian 6: Overriding dan Overloading
+left to right direction
+
+class Vehicle {
+  #model : String
+  #year : int
+  -available : boolean
+  -extraDays : int
+  --
+  +Vehicle(model : String, year : int)
+  +getModel() : String
+  +setModel(model : String) : void
+  +getYear() : int
+  +setYear(year : int) : void
+  +isAvailable() : boolean
+  +rentOut() : boolean
+  +returnVehicle() : void
+  +dailyRate() : int
+  +describe() : String
+  +toString() : String
+  +extendRental() : void
+  +extendRental(days : int) : void
+  +getTotalRentalDays() : int
+}
+
+class Car {
+  -plate : String
+  -brand : Brand
+  --
+  +Car(plate : String, model : String, year : int)
+  +Car(plate : String, model : String, year : int, brand : Brand)
+  +getPlate() : String
+  +getBrand() : Brand
+  +setBrand(brand : Brand) : void
+  +dailyRate() : int
+  +describe() : String
+}
+
+class Motorcycle {
+  -engineCc : int
+  --
+  +Motorcycle(model : String, year : int, engineCc : int)
+  +getEngineCc() : int
+  +dailyRate() : int
+  +describe() : String
+}
+
+class Truck {
+  -loadTons : int
+  --
+  +Truck(model : String, year : int, loadTons : int)
+  +Truck(model : String, year : int)
+  +getLoadTons() : int
+}
+
+Vehicle <|-- Car
+Vehicle <|-- Motorcycle
+Vehicle <|-- Truck
+@enduml

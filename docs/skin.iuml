@@ -1,0 +1,15 @@
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam roundCorner 8
+skinparam dpi 110
+skinparam defaultFontName DejaVu Sans
+skinparam ArrowColor #1d4ed8
+skinparam ClassBorderColor #1d4ed8
+skinparam ClassBackgroundColor #ffffff
+skinparam ClassFontColor #111827
+skinparam ClassStereotypeFontColor #1d4ed8
+skinparam NoteBackgroundColor #fff1f2
+skinparam NoteBorderColor #dc2626
+skinparam NoteFontColor #111827
+skinparam titleFontSize 16
+hide circle

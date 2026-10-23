@@ -1,0 +1,35 @@
+@startuml
+!include skin.iuml
+title Bagian 2: Class dan Object
+left to right direction
+
+class Brand {
+  +name : String
+  +country : String
+  --
+  +Brand(name : String, country : String)
+  +getName() : String
+  +getCountry() : String
+  +getInfo() : String
+}
+
+class Car {
+  +plate : String
+  +model : String
+  +year : int
+  +available : boolean
+  --
+  +Car(plate : String, model : String, year : int)
+  +getPlate() : String
+  +getModel() : String
+  +getYear() : int
+  +isAvailable() : boolean
+  +rentOut() : boolean
+  +returnVehicle() : void
+}
+note bottom of Car
+  Mobil baru: available = true.
+  rentOut() true sekali, lalu false
+  selama masih disewa.
+end note
+@enduml

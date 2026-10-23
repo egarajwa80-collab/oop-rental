@@ -1,0 +1,103 @@
+@startuml
+!include skin.iuml
+title Diagram Kelas Akhir: Polinema Rental
+
+class Main {
+  {static} +main(args : String[]) : void
+}
+class RentalApp {
+  -shop : RentalShop
+  -in : Scanner
+  -out : PrintStream
+  --
+  +RentalApp(shop, in, out)
+  +run() : void
+}
+class RentalShop {
+  -name : String
+  -vehicles : Vehicle[20]
+  -customers : Customer[10]
+  --
+  +addVehicle(vehicle) : boolean
+  +addCustomer(customer) : boolean
+  +findVehicleByModel(model) : Vehicle
+  +findCustomer(customerId) : Customer
+  +searchByKeyword(keyword) : Vehicle[]
+  +rent(customerId, model) : boolean
+  +giveBack(customerId, model) : boolean
+}
+class RentalAgent {
+  --
+  +rent(customer, car) : boolean
+  +giveBack(customer, car) : boolean
+}
+class Garage {
+  -code : String
+  -cars : Car[5]
+  --
+  +addCar(car) : boolean
+  +findByPlate(plate) : Car
+  +countAvailable() : int
+}
+class Customer {
+  -customerId : String
+  -name : String
+  -rentalCount : int
+  -card : RentalCard
+  --
+  +canRent() : boolean
+  +addRental() : boolean
+  +returnRental() : boolean
+}
+class RentalCard {
+  -number : String
+}
+class Vehicle {
+  #model : String
+  #year : int
+  -available : boolean
+  -extraDays : int
+  --
+  +rentOut() : boolean
+  +returnVehicle() : void
+  +dailyRate() : int
+  +describe() : String
+  +extendRental() : void
+  +extendRental(days : int) : void
+  +getTotalRentalDays() : int
+}
+class Car {
+  -plate : String
+  -brand : Brand
+  --
+  +dailyRate() : int
+  +describe() : String
+}
+class Motorcycle {
+  -engineCc : int
+  --
+  +dailyRate() : int
+  +describe() : String
+}
+class Truck {
+  -loadTons : int
+}
+class Brand {
+  -name : String
+  -country : String
+}
+
+Main ..> RentalShop
+Main ..> RentalApp
+RentalApp "1" --> "1" RentalShop
+RentalShop o-- "0..20" Vehicle
+RentalShop o-- "0..10" Customer
+Garage o-- "0..5" Car
+RentalAgent ..> Customer
+RentalAgent ..> Car
+Customer "1" *-- "1" RentalCard
+Car "*" --> "0..1" Brand
+Vehicle <|-- Car
+Vehicle <|-- Motorcycle
+Vehicle <|-- Truck
+@enduml

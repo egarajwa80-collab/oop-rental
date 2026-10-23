@@ -1,0 +1,48 @@
+@startuml
+!include skin.iuml
+title Bagian 5: Inheritance
+left to right direction
+
+class Vehicle <<buat kelas ini>> {
+  #model : String
+  #year : int
+  -available : boolean
+  --
+  +Vehicle(model : String, year : int)
+  +getModel() : String
+  +setModel(model : String) : void
+  +getYear() : int
+  +setYear(year : int) : void
+  +isAvailable() : boolean
+  +rentOut() : boolean
+  +returnVehicle() : void
+}
+
+class Car {
+  -plate : String
+  -brand : Brand
+  --
+  +Car(plate : String, model : String, year : int)
+  +getPlate() : String
+  +getBrand() : Brand
+  +setBrand(brand : Brand) : void
+}
+
+class Motorcycle <<buat kelas ini>> {
+  -engineCc : int
+  --
+  +Motorcycle(model : String, year : int, engineCc : int)
+  +getEngineCc() : int
+}
+
+class Truck <<buat kelas ini>> {
+  -loadTons : int
+  --
+  +Truck(model : String, year : int, loadTons : int)
+  +getLoadTons() : int
+}
+
+Vehicle <|-- Car
+Vehicle <|-- Motorcycle
+Vehicle <|-- Truck
+@enduml
